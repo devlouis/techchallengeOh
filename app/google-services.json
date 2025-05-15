@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "43280737564",
+    "project_id": "apptechchallengeoh",
+    "storage_bucket": "apptechchallengeoh.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:43280737564:android:1d4b916ad201c5cfb306d9",
+        "android_client_info": {
+          "package_name": "com.example.apptechchallengeoh"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClyzqRnOgwTBvm_B6pe-F0ejc7UKyvcc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
