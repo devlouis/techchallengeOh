@@ -64,6 +64,29 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.13.0"))
     implementation("com.google.firebase:firebase-analytics")
 
-    implementation("com.google.dagger:hilt-android:2.56.2")
-    kapt("com.google.dagger:hilt-android-compiler:2.56.2")
+    // Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
+
+
+    // Retrofit + Moshi
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.android)
+
+    //Nav
+    implementation(libs.androidx.navigation.compose)
+
+    // Firebase Authentication
+    implementation("com.google.firebase:firebase-auth-ktx")
+
+// DataStore para preferencias
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 }
