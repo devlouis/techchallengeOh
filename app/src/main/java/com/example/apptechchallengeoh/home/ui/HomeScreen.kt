@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.apptechchallengeoh.home.ui.CreateEventScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,7 +51,7 @@ fun HomeScreen() {
                     EventListScreen()
                 }
                 composable("createEvent") {
-                    CreateEventScreen()
+                    CreateEventScreen(navController = tabNavController)
                 }
             }
         }
@@ -62,8 +63,4 @@ fun EventListScreen() {
     Text("Lista de Eventos")
 }
 
-@Composable
-fun CreateEventScreen() {
-    Text("Formulario para Crear Evento")
-}
 

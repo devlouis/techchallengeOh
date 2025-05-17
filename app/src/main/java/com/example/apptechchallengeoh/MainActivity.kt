@@ -13,14 +13,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apptechchallengeoh.auth.ui.LoginScreen
 import com.example.apptechchallengeoh.auth.ui.RegisterScreen
-import com.example.apptechchallengeoh.di.signin.viewmodel.AuthViewModel
+import com.example.apptechchallengeoh.auth.viewmodel.AuthViewModel
 import com.example.apptechchallengeoh.ui.theme.AppTechChallengeOhTheme
 import dagger.hilt.android.AndroidEntryPoint
 

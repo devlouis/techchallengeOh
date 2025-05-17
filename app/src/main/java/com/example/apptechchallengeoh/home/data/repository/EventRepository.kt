@@ -1,6 +1,7 @@
 package com.example.apptechchallengeoh.home.data.repository
 
 import com.example.apptechchallengeoh.home.data.network.ApiService
+import com.example.apptechchallengeoh.home.domain.model.CategoryModel
 import com.example.apptechchallengeoh.home.domain.model.Event
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.channels.awaitClose
@@ -49,7 +50,7 @@ class EventRepository @Inject constructor(
     }
 
     // Obtener categorías desde la API REST
-    suspend fun getCategories(): List<String> {
+    suspend fun getCategories(): List<CategoryModel> {
         return apiService.getCategories()
     }
 }

@@ -1,9 +1,9 @@
-package com.example.apptechchallengeoh.di.signin.viewmodel
+package com.example.apptechchallengeoh.auth.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptechchallengeoh.auth.domain.usecase.AuthUseCase
-import com.example.apptechchallengeoh.di.signin.states.UiStateAuth
+import com.example.apptechchallengeoh.auth.states.UiStateAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

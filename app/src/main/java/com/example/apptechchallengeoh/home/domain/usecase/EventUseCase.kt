@@ -1,6 +1,7 @@
 package com.example.apptechchallengeoh.home.domain.usecase
 
 import com.example.apptechchallengeoh.home.data.repository.EventRepository
+import com.example.apptechchallengeoh.home.domain.model.CategoryModel
 import com.example.apptechchallengeoh.home.domain.model.Event
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -26,7 +27,7 @@ class EventUseCase @Inject constructor(private val eventRepository: EventReposit
     }
 
     // Obtener categorías desde la API
-    suspend fun getCategories(): List<String> {
+    suspend fun getCategories(): List<CategoryModel> {
         return eventRepository.getCategories()
     }
 }
