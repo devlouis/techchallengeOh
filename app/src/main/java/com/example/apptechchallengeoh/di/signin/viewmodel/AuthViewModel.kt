@@ -2,7 +2,7 @@ package com.example.apptechchallengeoh.di.signin.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apptechchallengeoh.auth.domain.model.AuthUseCase
+import com.example.apptechchallengeoh.auth.domain.usecase.AuthUseCase
 import com.example.apptechchallengeoh.di.signin.states.UiStateAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -58,7 +58,13 @@ class AuthViewModel @Inject constructor(private val authUseCase: AuthUseCase) : 
     }
 
     // Función de registro de usuario
-    fun register(email: String, password: String) {
+    fun register(email: String, password: String, confirmPassword: String) {
+        // Verificar si las contraseñas coinciden
+        if (password != confirmPassword) {
+            _uiState.value = UiStateAuth.Error("Las contraseñas no coinciden") // Error si no coinciden
+            return
+        }
+
         _uiState.value = UiStateAuth.Loading // Cambiar a estado de carga
         viewModelScope.launch {
             val result = authUseCase.register(email, password)

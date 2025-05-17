@@ -44,11 +44,11 @@ fun LoginScreen(navController: NavHostController) {
     //val authResult by authViewModel.authResult.collectAsState()
     val isAuthenticated by authViewModel.isAuthenticated.collectAsState()
 
-    LaunchedEffect(isAuthenticated) {
+    /*LaunchedEffect(isAuthenticated) {
         if (isAuthenticated) {
             navController.navigate("homeScreen")
         }
-    }
+    }*/
 
     Scaffold(
         topBar = {

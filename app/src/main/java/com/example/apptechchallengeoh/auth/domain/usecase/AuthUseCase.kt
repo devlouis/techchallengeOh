@@ -1,4 +1,4 @@
-package com.example.apptechchallengeoh.auth.domain.model
+package com.example.apptechchallengeoh.auth.domain.usecase
 
 import com.example.apptechchallengeoh.auth.data.repository.AuthRepository
 import javax.inject.Inject

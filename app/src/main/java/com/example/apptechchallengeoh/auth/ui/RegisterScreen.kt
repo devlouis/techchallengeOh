@@ -23,6 +23,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,6 +50,17 @@ fun RegisterScreen(navController: NavHostController, authViewModel: AuthViewMode
     val uiState by authViewModel.uiState.collectAsState()
     // Escuchar si el usuario ya está autenticado, si lo está, redirigirlo a la pantalla principal
     val isAuthenticated by authViewModel.isAuthenticated.collectAsState()
+
+    LaunchedEffect(isAuthenticated) {
+        if (isAuthenticated) {
+            navController.popBackStack() // Eliminar la pantalla actual de la pila
+            navController.navigate("homeScreen") {
+                // Aseguramos que la pantalla de login y registro no esté en la pila
+                popUpTo("loginScreen") { inclusive = true }
+                launchSingleTop = true
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -115,14 +127,7 @@ fun RegisterScreen(navController: NavHostController, authViewModel: AuthViewMode
 
                 // Botón Registrarse
                 Button(
-                    onClick = {
-                        if (password == confirmPassword) {
-                            authViewModel.register(email, password)
-                        } else {
-                            // Mostrar mensaje de error si las contraseñas no coinciden
-                            authViewModel.setError("Las contraseñas no coinciden.")
-                        }
-                    },
+                    onClick = { authViewModel.register(email, password, confirmPassword) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Registrar")
