@@ -1,5 +1,6 @@
 package com.example.apptechchallengeoh.auth.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apptechchallengeoh.auth.domain.usecase.AuthUseCase
@@ -7,6 +8,7 @@ import com.example.apptechchallengeoh.auth.states.UiStateAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,13 +22,21 @@ class AuthViewModel @Inject constructor(private val authUseCase: AuthUseCase) : 
     private val _isAuthenticated = MutableStateFlow(false)
     val isAuthenticated: StateFlow<Boolean> = _isAuthenticated
 
-
     private val _error = MutableStateFlow("")
     val error: StateFlow<String> = _error
+
+    private val _isPasswordVisible = MutableStateFlow(false)
+    val isPasswordVisible: StateFlow<Boolean> = _isPasswordVisible.asStateFlow()
 
     init {
         checkSession()
     }
+
+    // Mostrar y ocultar la contraseña
+    fun togglePasswordVisibility() {
+        _isPasswordVisible.value = !_isPasswordVisible.value
+    }
+
 
     fun checkSession() {
         viewModelScope.launch {
@@ -38,10 +48,12 @@ class AuthViewModel @Inject constructor(private val authUseCase: AuthUseCase) : 
 
     // Función de login
     fun login(email: String, password: String) {
+        Log.v("login", email)
+        Log.v("login", password)
         _uiState.value = UiStateAuth.Loading // Cambiar el estado a Loading
         viewModelScope.launch {
             // Llamada al UseCase para intentar hacer login
-            val result = authUseCase.login(email, password)
+            val result = authUseCase.login(email.trim(), password.trim())
 
             // Si el login es exitoso
             _uiState.value = if (result.isSuccess) {

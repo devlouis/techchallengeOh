@@ -1,6 +1,7 @@
 package com.example.apptechchallengeoh.auth.domain.usecase
 
 import com.example.apptechchallengeoh.auth.data.repository.AuthRepository
+import com.google.firebase.auth.FirebaseAuthException
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
@@ -10,7 +11,7 @@ class AuthUseCase @Inject constructor(private val authRepository: AuthRepository
         return try {
             val result = authRepository.login(email, password)
             if (result.isSuccess) {
-                Result.success("Login exitoso") // O cualquier otro mensaje adecuado
+                Result.success("Login exitoso")
             } else {
                 Result.failure(Exception("Credenciales incorrectas"))
             }
@@ -29,9 +30,20 @@ class AuthUseCase @Inject constructor(private val authRepository: AuthRepository
         }
     }
 
-    suspend fun register(email: String, password: String): Result<String> {
-        return authRepository.register(email, password)
-    }
+
+        // Registro con Firebase Authentication
+        suspend fun register(email: String, password: String): Result<String> {
+            return try {
+                // Intentar registrar al usuario en Firebase
+                val authResult = authRepository.register(email, password)
+                // Si el registro es exitoso, devolvemos el éxito
+                Result.success("Registro exitoso")
+            } catch (e: FirebaseAuthException) {
+                // Manejo de errores
+                Result.failure(e)
+            }
+        }
+
 
     suspend fun isAuthenticated(): Flow<Boolean> {
         return authRepository.isAuthenticated()
