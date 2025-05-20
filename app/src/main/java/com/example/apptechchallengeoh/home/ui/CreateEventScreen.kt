@@ -146,11 +146,6 @@ fun CreateEventScreen(
     var selectedCategory by remember { mutableStateOf("") }
     var isFocusedCategory by remember { mutableStateOf(false) }
 
-
-    if (eventsState is UiState.Success){
-        Log.v("events", (eventsState as UiState.Success<List<Event>>).data.toString())
-    }
-
     when (eventsAddState) {
         is UiState.Loading -> {
             ViewLoading()
@@ -196,8 +191,8 @@ fun CreateEventScreen(
             Column(
                 modifier = Modifier
                     .padding(16.dp)
-                    .verticalScroll(rememberScrollState())  // Permite scroll
-                    .fillMaxWidth(),  // Importante: no usar fillMaxSize aquí
+                    .verticalScroll(rememberScrollState())
+                    .fillMaxWidth(),
             ) {
                 Text(
                     text = "Crear Evento",
@@ -251,14 +246,13 @@ fun CreateEventScreen(
                 ExposedDropdownMenuBox(
                     expanded = expandedCategory,
                     onExpandedChange = {
-                        expandedCategory = !expandedCategory // Cambia el estado cuando se hace clic
+                        expandedCategory = !expandedCategory
                     }
                 ) {
                     // TextField que actúa como el menú desplegable
                     OutlinedTextField(
                         value = selectedCategory,
                         onValueChange = { selectedCategory = it },
-                        /*label = { Text("Categoría del Evento") },*/
                         trailingIcon = {
                             Icon(
                                 imageVector = if (expandedCategory) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
@@ -345,7 +339,7 @@ fun CreateEventScreen(
                                     eventViewModel.onCategorySelectChanged(category.name ?: "")
                                     selectedCategory = category.name.toString()
                                     expandedCategory =
-                                        false // Cierra el menú al seleccionar una opción
+                                        false
                                 }
                             )
                         }

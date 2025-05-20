@@ -25,22 +25,14 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Accedemos al ViewModel utilizando el delegado `by viewModels()`
         val authViewModel: AuthViewModel by viewModels()
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            /*AppTechChallengeOhTheme {
-                // Crear un NavController para la navegación
-                val navController = rememberNavController()
-
-                // Llamar a MainNavigation y pasarle el navController
-                MainNavigation(navController = navController)
-            }*/
             setContent {
-                val navController = rememberNavController() // Inicializa NavController aquí
-                val isAuthenticated by authViewModel.isAuthenticated.collectAsState() // Accede al estado de autenticación
+                val navController = rememberNavController()
+                val isAuthenticated by authViewModel.isAuthenticated.collectAsState()
 
                 // Usamos LaunchedEffect para manejar la navegación basada en la autenticación
                 LaunchedEffect(isAuthenticated) {
@@ -55,7 +47,6 @@ class MainActivity : ComponentActivity() {
                     }
                 }
 
-                // Configuramos el NavHost con el NavController y el gráfico de navegación
                 NavHost(navController = navController, startDestination = "loginScreen") {
                     composable("loginScreen") {
                         LoginScreen(navController = navController)

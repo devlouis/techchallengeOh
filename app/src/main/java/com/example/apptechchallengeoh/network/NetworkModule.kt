@@ -44,8 +44,8 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(moshi: Moshi, okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://53549cf7-784e-438f-aeae-11c382861c6a.mock.pstmn.io/") // URL base de la API
-            .client(okHttpClient) //logging
+            .baseUrl("https://53549cf7-784e-438f-aeae-11c382861c6a.mock.pstmn.io/")
+            .client(okHttpClient)
             .addConverterFactory(MoshiConverterFactory.create(moshi)) // Usamos Moshi como convertidor
             .build()
     }

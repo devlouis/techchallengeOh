@@ -73,7 +73,7 @@ class AuthViewModel @Inject constructor(private val authUseCase: AuthUseCase) : 
     fun register(email: String, password: String, confirmPassword: String) {
         // Verificar si las contraseñas coinciden
         if (password != confirmPassword) {
-            _uiState.value = UiStateAuth.Error("Las contraseñas no coinciden") // Error si no coinciden
+            _uiState.value = UiStateAuth.Error("Las contraseñas no coinciden")
             return
         }
 
@@ -83,9 +83,9 @@ class AuthViewModel @Inject constructor(private val authUseCase: AuthUseCase) : 
 
             // Si el registro es exitoso
             _uiState.value = if (result.isSuccess) {
-                UiStateAuth.Success("Registro exitoso") // Mensaje de éxito
+                UiStateAuth.Success("Registro exitoso")
             } else {
-                UiStateAuth.Error(result.exceptionOrNull()?.message ?: "Error desconocido") // Mensaje de error
+                UiStateAuth.Error(result.exceptionOrNull()?.message ?: "Error desconocido")
             }
 
             // Si el registro es exitoso, marcamos la sesión como autenticada
