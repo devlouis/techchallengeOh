@@ -45,8 +45,6 @@ import com.example.apptechchallengeoh.ui.ViewLoading
 @Composable
 fun LoginScreen(navController: NavHostController, authViewModel: AuthViewModel = hiltViewModel()) {
 
-    //val authViewModel: AuthViewModel = hiltViewModel()
-
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val isPasswordVisible by authViewModel.isPasswordVisible.collectAsState()
@@ -80,7 +78,6 @@ fun LoginScreen(navController: NavHostController, authViewModel: AuthViewModel =
             )
         }
         is UiStateAuth.Success -> {
-            // Aquí podrías mostrar un mensaje de éxito si lo deseas
         }
     }
 
@@ -163,7 +160,6 @@ fun LoginScreen(navController: NavHostController, authViewModel: AuthViewModel =
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen() {
-    // Usamos rememberNavController() para simular un NavController en la vista previa
     val navController = rememberNavController()
     LoginScreen(navController = navController)
 }

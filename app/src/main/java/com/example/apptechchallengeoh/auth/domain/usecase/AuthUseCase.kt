@@ -34,9 +34,7 @@ class AuthUseCase @Inject constructor(private val authRepository: AuthRepository
         // Registro con Firebase Authentication
         suspend fun register(email: String, password: String): Result<String> {
             return try {
-                // Intentar registrar al usuario en Firebase
                 val authResult = authRepository.register(email, password)
-                // Si el registro es exitoso, devolvemos el éxito
                 Result.success("Registro exitoso")
             } catch (e: FirebaseAuthException) {
                 // Manejo de errores

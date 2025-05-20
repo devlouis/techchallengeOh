@@ -8,7 +8,7 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)  // Esto indica que el módulo es global y se usará a nivel de toda la aplicación
+@InstallIn(SingletonComponent::class)
 object FirebaseModule {
 
     @Provides
