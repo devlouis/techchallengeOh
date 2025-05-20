@@ -26,6 +26,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.apptechchallengeoh.home.ui.CreateEventScreen
+import com.example.apptechchallengeoh.home.ui.EventsScreen
 import com.example.apptechchallengeoh.ui.TitleBar
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -86,7 +87,7 @@ fun HomeScreen() {
                 modifier = Modifier.padding(paddingValues)
             ) {
                 composable("eventList") {
-                    EventListScreen()
+                    EventsScreen()
                 }
                 composable("createEvent") {
                     CreateEventScreen(navController = tabNavController)
