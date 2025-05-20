@@ -1,4 +1,4 @@
-package com.example.apptechchallengeoh.di.signin.states
+package com.example.apptechchallengeoh.auth.states
 
 open class UiStateAuth<out T> {
     object Loading : UiStateAuth<Nothing>()

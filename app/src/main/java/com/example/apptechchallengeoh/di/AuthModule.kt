@@ -3,7 +3,7 @@ package com.example.apptechchallengeoh.di
 import android.app.Application
 import android.content.Context
 import com.example.apptechchallengeoh.auth.data.repository.AuthRepository
-import com.example.apptechchallengeoh.auth.domain.model.AuthUseCase
+import com.example.apptechchallengeoh.auth.domain.usecase.AuthUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides

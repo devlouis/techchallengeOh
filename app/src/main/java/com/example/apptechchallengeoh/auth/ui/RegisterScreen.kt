@@ -20,9 +20,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SmallTopAppBar
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -35,8 +34,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.example.apptechchallengeoh.di.signin.states.UiStateAuth
-import com.example.apptechchallengeoh.di.signin.viewmodel.AuthViewModel
+import com.example.apptechchallengeoh.auth.states.UiStateAuth
+import com.example.apptechchallengeoh.auth.viewmodel.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -49,6 +48,17 @@ fun RegisterScreen(navController: NavHostController, authViewModel: AuthViewMode
     val uiState by authViewModel.uiState.collectAsState()
     // Escuchar si el usuario ya está autenticado, si lo está, redirigirlo a la pantalla principal
     val isAuthenticated by authViewModel.isAuthenticated.collectAsState()
+
+    LaunchedEffect(isAuthenticated) {
+        if (isAuthenticated) {
+            navController.popBackStack() // Eliminar la pantalla actual de la pila
+            navController.navigate("homeScreen") {
+                // Aseguramos que la pantalla de login y registro no esté en la pila
+                popUpTo("loginScreen") { inclusive = true }
+                launchSingleTop = true
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -115,14 +125,7 @@ fun RegisterScreen(navController: NavHostController, authViewModel: AuthViewMode
 
                 // Botón Registrarse
                 Button(
-                    onClick = {
-                        if (password == confirmPassword) {
-                            authViewModel.register(email, password)
-                        } else {
-                            // Mostrar mensaje de error si las contraseñas no coinciden
-                            authViewModel.setError("Las contraseñas no coinciden.")
-                        }
-                    },
+                    onClick = { authViewModel.register(email, password, confirmPassword) },
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text("Registrar")
