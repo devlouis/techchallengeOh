@@ -143,7 +143,7 @@ fun ViewLoading() {
                     modifier = Modifier
                         .size(80.dp)
                         .padding(16.dp),
-                    color = Color(0xFF006241)
+                    color = Color(0xFFff0705)
                 )
                // CircularProgressIndicator()
             }

@@ -9,6 +9,7 @@ import com.example.apptechchallengeoh.home.domain.usecase.EventUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,6 +27,14 @@ class EventViewModel @Inject constructor(private val eventUseCase: EventUseCase)
     // Estado de eventos (carga, éxito, error)
     private val _eventsState = MutableStateFlow<UiState<List<Event>>>(UiState.Idle)
     val eventsState: StateFlow<UiState<List<Event>>> get() = _eventsState
+
+    private val _eventsAddState = MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val eventsAddState: StateFlow<UiState<Unit>> get() = _eventsAddState
+
+
+    // Estado para la prioridad seleccionada (por defecto: bajo)
+    private val _selectedPriority = MutableStateFlow("Baja")
+    val selectedPriority: StateFlow<String> = _selectedPriority
 
     init {
         getEvents()  // Inicializar la obtención de eventos
@@ -62,11 +71,13 @@ class EventViewModel @Inject constructor(private val eventUseCase: EventUseCase)
 
     // Agregar un nuevo evento
     fun addEvent(event: Event) {
+        _eventsAddState.value = UiState.Loading
         viewModelScope.launch {
             try {
                 eventUseCase.addEvent(event)  // Agregamos el evento
+                _eventsAddState.value = UiState.Success(Unit)  // Mostrar éxito
             } catch (e: Exception) {
-                _eventsState.value = UiState.Error("Error al crear el evento: ${e.message}")  // Manejo de errores al agregar el evento
+                _eventsAddState.value = UiState.Error("Error al crear el evento: ${e.message}")  // Manejo de errores al agregar el evento
             }
         }
     }
@@ -92,4 +103,20 @@ class EventViewModel @Inject constructor(private val eventUseCase: EventUseCase)
             }
         }
     }
+
+    fun setPriority(priority: String) {
+        _selectedPriority.value = priority
+    }
+
+
+
+    private val _category = MutableStateFlow("")
+    val category:  StateFlow<String> = _category.asStateFlow()
+
+    fun onCategorySelectChanged(newMonthSelect: String) {
+        _category.value = newMonthSelect
+        //_listDay.value = inflateDays(newMonthSelect)
+        //validateAllFields()
+    }
+
 }

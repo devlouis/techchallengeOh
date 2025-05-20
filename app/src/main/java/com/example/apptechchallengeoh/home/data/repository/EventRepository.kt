@@ -51,6 +51,6 @@ class EventRepository @Inject constructor(
 
     // Obtener categorías desde la API REST
     suspend fun getCategories(): List<CategoryModel> {
-        return apiService.getCategories()
+        return apiService.getCategories().categories ?: arrayListOf()
     }
 }

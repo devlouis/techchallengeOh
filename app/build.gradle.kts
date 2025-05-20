@@ -73,6 +73,7 @@ dependencies {
 
     // Retrofit + Moshi
     implementation(libs.retrofit)
+    implementation (libs.logging.interceptor)
     implementation(libs.converter.moshi)
 
     // Lifecycle
